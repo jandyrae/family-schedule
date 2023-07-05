@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h4>{{ event.name }}</h4>
+
+        <div class="pull-right btn-toolbar">
+          <a
+            [routerLink]="['edit']"
+            style="cursor: pointer"
+            class="btn btn-primary"
+            >Edit</a
+          >
+          <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
+            >Delete</a
+          >
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="list-group-item-heading"><b>Name: </b> {{ event?.name }}</div>
+        <div class="list-group-item-heading"><b>Date: </b> {{ event?.date | date:'short'}}</div>
+        <!-- <div class="list-group-item-heading"><b>Time: </b>{{ event?.time | date:'short' }}</div> -->
+        <div class="list-group-item-heading">
+          <b>Location: </b>{{ event?.location }}
+        </div>
+        <div class="list-group-item-heading"><b>Details: </b> {{ event?.details }}</div>
+        <div class="list-group-item-heading">
+          <b>Family: </b>{{ event?.belongsTo }}
+        </div>
+      </div>
+      <div *ngIf="event?.members && event?.members.length > 0">
+        <h6>Event Members:</h6>
+        <ul>
+          <li *ngFor="let each of members">
+            <p>{{ member.name }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

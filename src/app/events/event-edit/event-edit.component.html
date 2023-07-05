@@ -1,0 +1,115 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form
+      id="event-edit"
+      (ngSubmit)="onSubmitEvent(eventForm)"
+      #eventForm="ngForm"
+    >
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <div>
+            <label class="form-group" for="name">Event Name:</label>
+            <input
+              type="name"
+              id="name"
+              name="name"
+              class="form-control"
+              size="120"
+              max="120"
+              [ngModel]="event?.name"
+              #name="ngModel"
+            />
+          </div>
+          <div>
+            <label class="form-group" for="date">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              class="form-control"
+              [ngModel]="event?.date"
+              #date="ngModel"
+            />
+          </div>
+          <!-- <div>
+            <label for="time">Time:</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              class="form-control"
+              [ngModel]="event?.time"
+              #time="ngModel"
+            />
+          </div> -->
+
+          <div>
+            <label for="duration">Duration:</label>
+            <input
+              type="date"
+              id="duration"
+              name="duration"
+              class="form-control"
+              [ngModel]="event?.duration"
+              #duration="ngModel"
+            />
+          </div>
+
+          <div>
+            <label for="location">Location:</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-control"
+              [ngModel]="event?.location"
+              #location="ngModel"
+            />
+          </div>
+
+          <div>
+            <label for="details">Details:</label>
+            <textarea
+
+              id="details"
+              name="details"
+              class="form-control"
+              [ngModel]="event?.details"
+              #details="ngModel"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="belongsTo">Belongs to:</label>
+            <input
+              type="text"
+              id="belongsTo"
+              name="belongsTo"
+              class="form-control"
+              [ngModel]="event?.belongsTo"
+              #belongsTo="ngModel"
+            />
+          </div>
+
+          <div>
+            <label for="members">Members:</label>
+            <input
+              id="members"
+              name="members"
+              class="form-control"
+              multiple
+              [ngModel]="event?.members"
+              #members="ngModel"
+            />
+            <div id="unableToAdd" class="alert alert-danger" hidden></div>
+            <!-- <div *ngFor="let member of memberList" [value]="member">{{ member }}</div> -->
+            <!-- </input> -->
+          </div>
+
+          <button type="submit" class="form-control"  >Submit</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

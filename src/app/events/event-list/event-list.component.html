@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-md-10 ">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row pad-left-right">
+          <span class="title pull-left">Events</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <app-event-detail
+            *ngFor="let event of events"
+            [event] ="event" ></app-event-detail>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+      <!-- <cms-contact-item *ngFor="let messageEl of contacts"
+        [contact]="messageEl"
+        (contactSelected)="onContactSelect(messageEl)"></cms-contact-item
+      </div> -->
+      <div class="panel-footer">
+        <app-event-edit></app-event-edit>
+    </div>
+  </div>
+</div>
