@@ -6,7 +6,7 @@ export class Event {
     public id: string,
     public name: string,
     public date: Date,
-    // public time: Date,
+    public time: string,
     public duration: Date,
     public location: string,
     public details: string,

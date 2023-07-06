@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Event } from '../event.model';
+import { EventService } from '../event.service';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 
 @Component({
@@ -7,12 +9,28 @@ import { Event } from '../event.model';
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.css']
 })
-export class EventDetailComponent {
+export class EventDetailComponent implements OnInit {
   @Input() event: Event;
+  // event: Event;
+  id: string;
 
-  constructor(){}
+  constructor(
+    private eventService: EventService,
+    private route: ActivatedRoute,
+    private router: Router){}
+
   ngOnInit(){
-
+    this.route.params.subscribe((params:Params) => {
+      this.id = params['id'];
+      this.event= this.eventService.getEvent(this.id);
+    })
   }
-  onDelete() {}
+
+  onEventEdit() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  onDelete() {
+    // this.eventService.deleteEvent(this.id);
+  }
 }

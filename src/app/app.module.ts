@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FamilyComponent } from './family/family.component';
@@ -12,6 +12,7 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
 import { EventListComponent } from './events/event-list/event-list.component';
 import { HeaderComponent } from './header.component';
 import { Router, RouterModule } from '@angular/router';
+import { EventItemComponent } from './events/event-item/event-item.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,15 @@ import { Router, RouterModule } from '@angular/router';
     EventEditComponent,
     EventDetailComponent,
     EventListComponent,
-    HeaderComponent
+    HeaderComponent,
+    EventItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

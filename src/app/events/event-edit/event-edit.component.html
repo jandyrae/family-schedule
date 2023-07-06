@@ -31,7 +31,7 @@
               #date="ngModel"
             />
           </div>
-          <!-- <div>
+          <div>
             <label for="time">Time:</label>
             <input
               type="time"
@@ -41,7 +41,7 @@
               [ngModel]="event?.time"
               #time="ngModel"
             />
-          </div> -->
+          </div>
 
           <div>
             <label for="duration">Duration:</label>
@@ -70,7 +70,6 @@
           <div>
             <label for="details">Details:</label>
             <textarea
-
               id="details"
               name="details"
               class="form-control"
@@ -91,23 +90,27 @@
             />
           </div>
 
+          <div id="unableToAdd" class="alert alert-danger" hidden></div>
           <div>
             <label for="members">Members:</label>
-            <input
+            <select
               id="members"
               name="members"
+              multiple
               class="form-control"
               multiple
               [ngModel]="event?.members"
               #members="ngModel"
-            />
-            <div id="unableToAdd" class="alert alert-danger" hidden></div>
-            <!-- <div *ngFor="let member of memberList" [value]="member">{{ member }}</div> -->
-            <!-- </input> -->
+            >
+              <option *ngFor="let member of memberList" [value]="member">
+                {{ member }}
+              </option>
+            </select>
           </div>
 
-          <button type="submit" class="form-control"  >Submit</button>
-
+          <button type="submit" class="form-control btn btn-outline-success">
+            Submit
+          </button>
         </div>
       </div>
     </form>

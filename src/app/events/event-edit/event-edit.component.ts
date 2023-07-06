@@ -13,6 +13,7 @@ import { EventService } from '../event.service';
 export class EventEditComponent implements OnInit {
   @ViewChild('eventForm') eventForm: NgForm;
   event: Event;
+  events: Event[];
   editMode: boolean = false;
   id: string;
   member: Member;
@@ -20,7 +21,7 @@ export class EventEditComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    // private router: Router,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -47,7 +48,7 @@ export class EventEditComponent implements OnInit {
       '',
       value.name,
       value.date,
-      // value.time,
+      value.time,
       value.duration,
       value.location,
       value.details,
@@ -57,7 +58,7 @@ export class EventEditComponent implements OnInit {
 
     if (this.editMode) {
       //update event
-      this.eventService.updateEvent(this.event, newEvent);
+      this.eventService.updateEvent(this.event.toString() , newEvent);
     } else {
       //create new event
       this.eventService.addEvent(newEvent);
@@ -65,7 +66,8 @@ export class EventEditComponent implements OnInit {
     this.editMode = false;
     form.reset();
     // navigate to list
-    // this.router.navigate(['/events']);
+    this.router.navigate(['/events']);
+    this.events = this.eventService.getEvents();
   }
 
   isInvalidMember(newMember: Member) {
