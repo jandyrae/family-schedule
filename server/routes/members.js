@@ -6,7 +6,7 @@ const MemberSchema = require("../models/member");
 
 router.get("/", (req, res, next) => {
   MemberSchema.find()
-    .populate("belongsTo")
+    // .populate("belongsTo")
     .then((members) => {
       res.status(200).json({
         message: "members retrieval success",
@@ -37,5 +37,30 @@ router.get("/:id", (req, res, next) => {
     });
 });
 
+router.post("/", (req, res, next)=> {
+  const maxMemberId = sequenceGenerator.nextId("members");
+  const member = new MemberSchema({
+    id: maxMemberId,
+    name: req.body.name,
+    belongsTo: req.body.belongsTo,
+    email: req.body.email,
+    phone: req.body.phone,
+    address: req.body.address,
+    image: req.body.image,
+    events: (req.body.events = null),
+  });
+  member.save().then((newMember)=>{
+    res.status(201).json({
+      message: "Member added successfully",
+      member:member,
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "An error occurred saving the member",
+      error: err,
+    });
+  });
+
+})
 
 module.exports = router;

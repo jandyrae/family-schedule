@@ -14,24 +14,24 @@ maxMemberId = 0;
   constructor(private http: HttpClient) { }
 
   getMember(id: string): Member {
-    // return this.members.find((member) => member.id === id);
-    this.http.get<{message: String, member: Member}>(
-      `http://127.0.0.1:3000/members/${id}`
-    )
-    .pipe(map((result)=> {
-      const member: Member = result.member;
-      return member;
-    })
-    )
-    .subscribe({
-      next: (value) => {
-        this.member = value;
+    return this.members.find((member) => member.id === id);
+    // this.http.get<{message: String, member: Member}>(
+    //   `http://127.0.0.1:3000/members/${id}`
+    // )
+    // .pipe(map((result)=> {
+    //   const member: Member = result.member;
+    //   return member;
+    // })
+    // )
+    // .subscribe({
+    //   next: (value) => {
+    //     this.member = value;
 
-      },
-      error: (err) => console.error(err),
+    //   },
+    //   error: (err) => console.error(err),
 
-    })
-    return this.member;
+    // })
+    // return this.member;
   }
 
   getMembers(): Member[] {
@@ -46,8 +46,8 @@ maxMemberId = 0;
     .subscribe({
       next: (value) => {
         this.members = value;
-        this.members.sort((a,b) => a.id > b.id ? 1 : -1 );
-        this.membersChanged.next([...this.members]);
+        // this.members.sort((a,b) => a.name > b.name ? 1 : -1 );
+        // this.membersChanged.next([...this.members]);
       },
       error: (err) => console.error(err),
 
@@ -55,6 +55,35 @@ maxMemberId = 0;
     return this.members.slice();
   }
 
+  addMember(member:Member) {
+    if (!member) {
+      return;
+    }
+    member.id = '';
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    this.http
+      .post<{ message: string; member: Member }>(
+        'http://127.0.0.1:3000/members',
+        member,
+        headers
+      )
+      .subscribe({
+        next: (n) => {
+          // this.members.push(n.member);
+          console.log(n.message);
+          this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
+          this.members = this.getMembers();
+        },
+        error: (e) => console.error(Error, 'an error occurred' + e),
+        complete: () => {
+          this.membersChanged.next([...this.members]);
+        },
+      });
+  }
 
 
 

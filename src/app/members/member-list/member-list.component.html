@@ -1,13 +1,17 @@
 <div class="container">
   <div class=" pull-right">
     <button class="btn btn-success" (click)="onNewMember()">
-      New Event
+      Add Member
     </button>
   </div>
   <h3>Members List</h3>
   <div class="row">
     <div class="col-md-6" >
-      <app-member-item *ngFor="let member of members" [member]="member"></app-member-item>
+      <hr>
+      <app-member-item
+      *ngFor="let member of members"
+      [member]="member"
+      ></app-member-item>
     </div>
   </div>
 </div>

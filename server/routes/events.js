@@ -60,7 +60,7 @@ router.post("/", (req, res, next) => {
       });
     })
     .catch((err) => {
-      res.status(201).json({
+      res.status(500).json({
         message: "An error occurred saving the event",
         error: err,
       });

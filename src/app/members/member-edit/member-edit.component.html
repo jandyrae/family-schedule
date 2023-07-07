@@ -10,7 +10,7 @@
         id="name"
         placeholder="Enter name"
         required
-        [(ngModel)]="member.name"
+        [ngModel]="member?.name"
         name="name"
         #name="ngModel"
       />
@@ -21,12 +21,12 @@
         class="form-control"
         id="belongsTo"
         required
-        [ngModel]="member.belongsTo"
+        [ngModel]="member?.belongsTo"
         name="belongsTo"
         #belongsTo="ngModel"
       >
         <!-- Add options for family selection -->
-        <option value="family1">Family 1</option>
+        <option value="64a71c7e4f502ac3e7d78787">Dodges</option>
         <option value="family2">Family 2</option>
         <option value="family3">Family 3</option>
       </select>
@@ -38,7 +38,7 @@
         class="form-control"
         id="email"
         placeholder="Enter email"
-        [ngModel]="member.email"
+        [ngModel]="member?.email"
         name="email"
         #email="ngModel"
       />
@@ -50,7 +50,7 @@
         class="form-control"
         id="phone"
         placeholder="Enter phone number"
-        [ngModel]="member.phone"
+        [ngModel]="member?.phone"
         name="phone"
         #phone="ngModel"
       />
@@ -62,7 +62,7 @@
         class="form-control"
         id="address"
         placeholder="Enter address"
-        [ngModel]="member.address"
+        [ngModel]="member?.address"
         name="address"
         #address="ngModel"
       />
@@ -74,7 +74,7 @@
         class="form-control"
         id="image"
         placeholder="Enter image URL"
-        [ngModel]="member.image"
+        [ngModel]="member?.image"
         name="image"
         #image="ngModel"
       />

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Member } from '../member.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-member-item',
@@ -7,7 +8,11 @@ import { Member } from '../member.model';
   styleUrls: ['./member-item.component.css']
 })
 export class MemberItemComponent {
-member: Member;
+@Input() member: Member;
+@Input() id: string;
+@Output() memberSelected = new Subject<void>();
 
-  onSelected(){}
+  onSelected(){
+    this.memberSelected.next();
+  }
 }

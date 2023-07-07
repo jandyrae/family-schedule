@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class EventItemComponent {
   @Input() event:Event;
-  @Input() id:number;
+  @Input() id: string;
   @Output() eventSelected = new Subject<void>();
 
   onSelected() {
