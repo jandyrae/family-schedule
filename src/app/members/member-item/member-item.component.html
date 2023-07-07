@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-6">
+
+    <div class="border border-2">
+      <a
+        style="cursor: pointer"
+        routerLinkActive="active"
+        [routerLink]="[member?.id]"
+        class="list-group-item clearfix"
+        (click)="onSelected()"
+      >
+        <div class="text-center mt-3">
+          <h4 class="list-group-item-heading">{{ member?.name }}</h4>
+          <!-- <p class="list-group-item-text">{{ member.phone }}</p> -->
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

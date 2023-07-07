@@ -10,7 +10,7 @@ export class Event {
     public duration: Date,
     public location: string,
     public details: string,
-    public belongsTo: Family["id"],
+    public belongsTo: Family,
     public members: Member[]
   ) {}
 }

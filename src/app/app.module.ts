@@ -13,6 +13,10 @@ import { EventListComponent } from './events/event-list/event-list.component';
 import { HeaderComponent } from './header.component';
 import { Router, RouterModule } from '@angular/router';
 import { EventItemComponent } from './events/event-item/event-item.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberItemComponent } from './members/member-item/member-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { EventItemComponent } from './events/event-item/event-item.component';
     EventDetailComponent,
     EventListComponent,
     HeaderComponent,
-    EventItemComponent
+    EventItemComponent,
+    MemberListComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    MemberItemComponent
   ],
   imports: [
     BrowserModule,

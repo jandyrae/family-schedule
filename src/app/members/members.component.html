@@ -1,1 +1,13 @@
-<p>members works!</p>
+<div class="row">
+  <div class="col-md-7">
+    <app-member-list></app-member-list>
+  </div>
+
+  <div class="col-md-5">
+    <router-outlet></router-outlet>
+    <!-- <app-member-detail
+      *ngIf="selectedMember"
+      [event]="selectedMember"
+    ></app-member-detail> -->
+  </div>
+</div>

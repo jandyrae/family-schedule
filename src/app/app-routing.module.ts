@@ -6,6 +6,9 @@ import { MembersComponent } from './members/members.component';
 import { FamilyComponent } from './family/family.component';
 import { EventEditComponent } from './events/event-edit/event-edit.component';
 import { EventDetailComponent } from './events/event-detail/event-detail.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/events', pathMatch: 'full' },
@@ -18,7 +21,11 @@ const routes: Routes = [
       { path: ':id/edit', component: EventEditComponent },
     ],
   },
-  { path: 'members', component: MembersComponent },
+  { path: 'members', component: MembersComponent, children: [
+    {path: 'new', component: MemberEditComponent},
+    {path: ':id', component: MemberDetailComponent},
+    {path: ':id/edit', component: MemberEditComponent},
+  ]},
   { path: 'family', component: FamilyComponent },
 ];
 

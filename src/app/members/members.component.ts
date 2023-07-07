@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Member } from './member.model';
 
 @Component({
   selector: 'app-members',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent {
-
+selectedMember = new Subject<Member>();
 }

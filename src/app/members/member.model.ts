@@ -1,10 +1,11 @@
 import { Family } from "../family/family.model";
+import { Event } from "../events/event.model";
 
 export class Member {
   constructor(
     public id: string,
     public name: string,
-    public belongsTo: Family["id"],
+    public belongsTo: Family,
     public email?: string,
     public phone?: string,
     public address?: string,

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Event } from './event.model';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MemberService } from '../members/member.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +14,11 @@ export class EventService {
   event: Event;
   currentId: number;
   maxId = 0;
-  constructor() {
-    // Load dummy data when the component is initialized
-    // this.loadDummyData();
+
+  constructor(private http: HttpClient,
+    private memberService: MemberService) {
     this.maxId = this.getMaxId();
+
   }
   getMaxId(): number {
     this.events.forEach((event) => {
@@ -27,65 +30,100 @@ export class EventService {
     return this.maxId;
   }
 
-  loadDummyData() {
-    const event1 = new Event(
-      '1',
-      'Family Vacation Planning Meeting',
-      new Date('2023-07-05'),
-      '6:00 PM',
-      new Date('1970-01-01T02:30:00'),
-      'Meeting Room',
-      'Discuss family vacation plans',
-      '1', // Belongs to Family ID
-      [
-        { id: '1', name: 'Jaynann Perrett', belongsTo: '0' },
-        { id: '2', name: 'Jorden Perrett', belongsTo: '1' },
-        { id: '3', name: 'Jandy Kiger', belongsTo: '2' },
-      ]
-    );
-
-    const event2 = new Event(
-      '2',
-      "Planning Mtg for 2024 Girl's Night",
-      new Date('2023-07-06'),
-      '5:30 PM',
-      new Date('1970-01-01T01:15:00'),
-      'Living Room',
-      'Family movie night',
-      '0', // Belongs to Family ID
-      [
-        { id: '1', name: 'Jaynann Perrett', belongsTo: '0' },
-        { id: '8', name: 'Marissa Perrett', belongsTo: '1' },
-        { id: '13', name: 'Vaeh Perrett', belongsTo: '1' },
-      ]
-    );
-
-    // Add the dummy events to the events array
-    this.events.push(event1, event2);
-  }
   getEvent(id: string): Event {
     return this.events.find((event) => event.id === id);
+    // this.http
+    //   .get<{ message: string; event: Event }>(`http://127.0.0.1:3000/events${id}`)
+    //   .pipe(
+    //     map((result) => {
+    //       const event: Event = result.event;
+    //       return event;
+    //     })
+    //   )
+    //   .subscribe({
+    //     next: (value) => {
+    //       this.event = value;
+
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //     },
+    //     complete() {
+    //       console.log('getEvent succeeded');
+    //     },
+    //   });
+    // return this.event;
   }
 
   getEvents(): Event[] {
+    // return this.events.slice();
+    this.http
+      .get<{ message: string; events: Event[] }>('http://127.0.0.1:3000/events')
+      .pipe(
+        map((result) => {
+          const events: Event[] = result.events;
+          return events;
+        })
+      )
+      .subscribe({
+        next: (value) => {
+          this.events = value;
+          this.events.sort((a,b) => a.date > b.date ? 1: -1);
+          // this.eventsChanged.next([...this.events]);
+
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete() {
+          console.log('getEvents succeeded');
+        },
+      });
     return this.events.slice();
   }
 
   addEvent(eventData: Event) {
-    const newEvent: Event = {
-      id: this.maxId.toString(),
-      name: eventData.name,
-      date: eventData.date,
-      time: eventData.time,
-      duration: eventData.duration,
-      location: eventData.location,
-      details: eventData.details,
-      belongsTo: eventData.belongsTo,
-      members: eventData.members,
-    };
+    // const newEvent: Event = {
+    //   id: this.maxId.toString(),
+    //   name: eventData.name,
+    //   date: eventData.date,
+    //   time: eventData.time,
+    //   duration: eventData.duration,
+    //   location: eventData.location,
+    //   details: eventData.details,
+    //   belongsTo: eventData.belongsTo,
+    //   members: eventData.members,
+    // };
 
-    // Add the new event to your events array or perform any other desired actions
-    this.events.push(newEvent);
+    // // Add the new event to your events array or perform any other desired actions
+    // this.events.push(newEvent);
+    if (!eventData) {
+      return;
+    }
+    eventData.id = '';
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    this.http
+      .post<{ message: string; eventData: Event }>(
+        'http://127.0.0.1:3000/events',
+        eventData,
+        headers
+      )
+      .subscribe({
+        next: (n) => {
+          // this.events.push(n.eventData);
+          console.log(n.message);
+          this.events.sort((a, b) => (b.date < a.date ? 1 : -1));
+          this.events = this.getEvents();
+        },
+        error: (e) => console.error(Error, 'an error occurred' + e),
+        complete: () => {
+          this.eventsChanged.next([...this.events]);
+        },
+      });
   }
 
   updateEvent(id: string, editedEvent: Event) {

@@ -20,14 +20,14 @@ export class EventListComponent {
   ) {}
 
   ngOnInit() {
-    this.eventService.loadDummyData();
+    // this.eventService.loadDummyData();
+    this.events = this.eventService.getEvents();
     this.eventService.eventsChanged.subscribe((events: Event[]) => {
       this.events = events;
     });
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
     });
-    this.events = this.eventService.getEvents();
     // console.log(this.events);
   }
 

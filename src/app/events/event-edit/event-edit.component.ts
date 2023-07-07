@@ -4,6 +4,7 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Event } from '../event.model';
 import { NgForm } from '@angular/forms';
 import { EventService } from '../event.service';
+import { MemberService } from 'src/app/members/member.service';
 
 @Component({
   selector: 'app-event-edit',
@@ -21,6 +22,7 @@ export class EventEditComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private memberService: MemberService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -38,6 +40,7 @@ export class EventEditComponent implements OnInit {
       }
       this.editMode=true;
       // clone by json
+      this.memberList = this.memberService.getMembers();
     });
   }
 

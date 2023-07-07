@@ -102,8 +102,8 @@
               [ngModel]="event?.members"
               #members="ngModel"
             >
-              <option *ngFor="let member of memberList" [value]="member">
-                {{ member }}
+              <option *ngFor="let member of this.memberList" [value]="member.name">
+                {{ member.name }}
               </option>
             </select>
           </div>

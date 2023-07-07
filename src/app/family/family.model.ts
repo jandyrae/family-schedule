@@ -1,4 +1,4 @@
-import { Member } from "../members/member.model";
+import { Member } from '../members/member.model';
 
 export class Family {
   constructor(
@@ -6,6 +6,5 @@ export class Family {
     public name: string,
     public image: string,
     public members: Member[],
-    public events: Event[]
-  ){}
+  ) {}
 }

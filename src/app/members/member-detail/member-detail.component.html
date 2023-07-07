@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    <h5>{{ member?.name }}</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <img *ngIf="member?.image" [src]="member?.image" class="img-fluid" alt="{{member?.name}}">
+
+        <p><strong>Email:</strong> {{ member?.email }}</p>
+        <p><strong>Phone:</strong> {{ member?.phone }}</p>
+        <p><strong>Address:</strong> {{ member?.address }}</p>
+      </div>
+      <div class="col-md-8">
+        <h6>Belongs to Family:</h6>
+        <p>{{ member?.belongsTo.name }}</p>
+        <h6>Events:</h6>
+        <ul>
+          <li *ngFor="let event of member?.events">{{ event?.name }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
