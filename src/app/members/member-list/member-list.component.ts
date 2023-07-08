@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Member } from '../member.model';
 import { MemberService } from '../member.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css'],
 })
-export class MemberListComponent {
+export class MemberListComponent implements OnInit {
   members: Member[] = [];
   id: string;
 

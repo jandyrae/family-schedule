@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Event } from './event.model';
 import { EventService } from './event.service';
 
@@ -7,7 +7,7 @@ import { EventService } from './event.service';
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css'],
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit {
   selectedEvent: Event;
 
   constructor(private eventService: EventService) {}

@@ -49,10 +49,11 @@ router.post("/", (req, res, next)=> {
     image: req.body.image,
     events: (req.body.events = null),
   });
-  member.save().then((newMember)=>{
+  member.save()
+  .then((newMember)=>{
     res.status(201).json({
       message: "Member added successfully",
-      member:member,
+      member:newMember,
     });
   }).catch((err) => {
     res.status(500).json({
@@ -61,6 +62,36 @@ router.post("/", (req, res, next)=> {
     });
   });
 
-})
+});
+
+router.put("/:id", (req, res, next) => {
+  MemberSchema.findOne({ id: req.params.id })
+    .then((member) => {
+      member.name = req.body.name;
+      member.belongsTo = req.body.belongsTo;
+      member.email = req.body.email;
+      member.phone = req.body.phone;
+      member.address = req.body.address;
+      member.image = req.body.image;
+      member.events = (req.body.events = null);
+    })
+    .then((member) => {
+      res.status(204).json({
+        message: "Member updated successfully",
+        member: member,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "An error occurred updating the member",
+        error: err,
+      });
+    }).catch((error) => {
+      res.status(500).json({
+        message: "Member not found.",
+        error: { member: "Member not found", error },
+      });
+    });
+});
 
 module.exports = router;

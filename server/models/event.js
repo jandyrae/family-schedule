@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const Family = require("./family");
 
 const eventSchema = new Schema({
   id: { type: String, required: true },
@@ -9,8 +10,8 @@ const eventSchema = new Schema({
   duration: { type: Date },
   location: { type: String },
   details: { type: String },
-  belongsTo: { type: mongoose.Schema.Types.ObjectId, ref: "Family" },
-  members: [{ type: mongoose.Schema.Types.ObjectId, ref: "Member" }],
+  belongsTo: { type: Schema.Types.ObjectId, ref: "Family" },
+  members: [{ type: Schema.Types.ObjectId, ref: "Member" }],
 });
 
 module.exports = mongoose.model("Event", eventSchema);

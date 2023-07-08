@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { Subject, map } from 'rxjs';
 import { Member } from './member.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class MemberService {
 membersChanged = new Subject<Member[]>();
+memberSelected = new Subject<Member>();
 members: Member[] = [];
 member: Member;
 maxMemberId = 0;
@@ -46,8 +47,8 @@ maxMemberId = 0;
     .subscribe({
       next: (value) => {
         this.members = value;
-        // this.members.sort((a,b) => a.name > b.name ? 1 : -1 );
-        // this.membersChanged.next([...this.members]);
+        this.members.sort((a,b) => a.name > b.name ? 1 : -1 );
+        this.membersChanged.next([...this.members]);
       },
       error: (err) => console.error(err),
 
@@ -75,8 +76,8 @@ maxMemberId = 0;
         next: (n) => {
           // this.members.push(n.member);
           console.log(n.message);
-          this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
-          this.members = this.getMembers();
+          // this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
+          // this.members = this.getMembers();
         },
         error: (e) => console.error(Error, 'an error occurred' + e),
         complete: () => {

@@ -5,7 +5,7 @@ const familySchema = new Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
   image: { type: String },
-  members: [{ type: mongoose.Schema.Types.ObjectId, ref: "Member" }],
+  members: [{ type: Schema.Types.ObjectId, ref: "Member" }],
 });
 
 module.exports = mongoose.model("Family", familySchema);

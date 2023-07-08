@@ -48,7 +48,7 @@ export class MemberEditComponent implements OnInit {
     } // add or update
     this.editMode = false;
     form.reset();
-    this.router.navigate(["/members"]);
+    this.router.navigate(['/members']);
     this.members = this.memberService.getMembers();
   }
 }

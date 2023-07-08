@@ -5,12 +5,12 @@
       <div class="panel-heading">
         <div class="row ">
           <div class="pad-left-right">
-            <h2 class="title pull-left">Members</h2>
+            <h2 class="title pull-left">Families</h2>
             <div class="panel-body">
               <!-- <div class="row"> -->
                 <div class=" pull-right">
-                  <button class="btn btn-success" (click)="onNewMember()">
-                    Add Member
+                  <button class="btn btn-success" (click)="onNewFamily()">
+                    Add Family
                   </button>
                 </div>
               <!-- </div> -->
@@ -22,10 +22,10 @@
       <hr />
       <div class="row">
         <div class="col-12">
-          <app-member-item
-          *ngFor="let member of members"
-          [member]="member"
-          ></app-member-item>
+          <app-family-detail
+          *ngFor="let family of families"
+          [family]="family"
+          ></app-family-detail>
         </div>
       </div>
     </div>

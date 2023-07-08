@@ -6,7 +6,7 @@ const EventSchema = require("../models/event");
 
 router.get("/", (req, res, next) => {
   EventSchema.find()
-    // .populate("belongsTo")
+    // .populate('belongsTo')
     .then((events) => {
       res.status(200).json({
         message: "Events retrieval success",
@@ -24,7 +24,7 @@ router.get("/:id", (req, res, next) => {
   EventSchema.findOne({
     id: req.params.id,
   })
-    // .populate("belongsTo")
+    // .populate('belongsTo')
     .then((event) => {
       res.status(200).json({
         message: "Event retrieval success",
@@ -82,10 +82,10 @@ router.put("/:id", (res, req, next) => {
       event.members = req.body.members = null;
 
       EventSchema.updateOne({ id: req.params.id }, event)
-        .then((result) => {
+        .then(() => {
           res.status(204).json({
             message: "Event updated successfully",
-            result: result,
+
           });
         })
         .catch((error) => {
@@ -109,10 +109,9 @@ router.delete("/:id", (req, res, next) => {
   })
     .then(() => {
       EventSchema.deleteOne({ id: req.params.id })
-        .then((result) => {
+        .then(() => {
           res.status(204).json({
             message: "Event deleted successfully.",
-            result: result,
           });
         })
         .catch((error) => {

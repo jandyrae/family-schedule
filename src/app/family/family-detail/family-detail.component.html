@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h5>{{ family?.name }}</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <img *ngIf="family?.image" [src]="family?.image" class="img-fluid" alt="{{family?.name}}">
+        <ul>
+          <li *ngFor="let member of family?.members">{{ member?.name }}</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
