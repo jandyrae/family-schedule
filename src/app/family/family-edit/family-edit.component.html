@@ -25,7 +25,7 @@
       name="image"
       #image="ngModel"
     />
-     <div class="form-group">
+     <div class="form-group" *ngIf="family.members.length > 0">
       <label for="members">Members</label>
 
       <select name="members" id="members">

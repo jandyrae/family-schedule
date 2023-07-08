@@ -6,7 +6,7 @@ const MemberSchema = require("../models/member");
 
 router.get("/", (req, res, next) => {
   MemberSchema.find()
-    // .populate("belongsTo")
+    .populate("belongsTo")
     .then((members) => {
       res.status(200).json({
         message: "members retrieval success",
@@ -23,7 +23,7 @@ router.get("/:id", (req, res, next) => {
   MemberSchema.findOne({
     id: req.params.id
   })
-    // .populate("belongsTo")
+    .populate("belongsTo")
     .then((member) => {
       res.status(200).json({
         message: "Member retrieval success",

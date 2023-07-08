@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+nav.navbar {
+  background-color: #D4CDC3;
+}
+nav a {
+  color: #3a3938;
+  font-size: larger;
+}

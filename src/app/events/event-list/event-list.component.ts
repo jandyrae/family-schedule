@@ -21,7 +21,7 @@ export class EventListComponent {
 
   ngOnInit() {
     // this.eventService.loadDummyData();
-    this.events = this.eventService.getEvents();
+    this.eventService.getEvents();
     this.eventService.eventsChanged.subscribe((events: Event[]) => {
       this.events = events;
     });

@@ -14,7 +14,7 @@ import { MemberService } from 'src/app/members/member.service';
 export class EventEditComponent implements OnInit {
   @ViewChild('eventForm') eventForm: NgForm;
   event: Event;
-  events: Event[];
+  events: Event[] = [];
   editMode: boolean = false;
   id: string;
   member: Member;
@@ -40,7 +40,8 @@ export class EventEditComponent implements OnInit {
       }
       this.editMode=true;
       // clone by json
-      this.memberList = this.memberService.getMembers();
+      // this.memberList =
+      this.memberService.getMembers();
     });
   }
 
@@ -56,7 +57,7 @@ export class EventEditComponent implements OnInit {
       value.location,
       value.details,
       value.belongsTo,
-      value.members
+      (value.members = null)
     );
 
     if (this.editMode) {

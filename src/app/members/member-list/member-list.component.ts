@@ -20,7 +20,7 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.members = this.memberService.getMembers();
+    this.memberService.getMembers();
     this.memberService.membersChanged.subscribe((members: Member[]) => {
       this.members = members;
     });

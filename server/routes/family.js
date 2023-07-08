@@ -6,6 +6,7 @@ const FamilySchema = require("../models/family");
 
 router.get("/", (req, res, next) => {
   FamilySchema.find()
+  .populate('members')
     .then((family) => {
       res.status(200).json({
         message: "all Family retrieval success",
@@ -22,7 +23,7 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   FamilySchema.findOne({
     id: req.params.id,
-  })
+  }).populate('members')
     .then((family) => {
       res.status(200).json({
         message: "One Family retrieval success",
@@ -41,8 +42,8 @@ router.post("/", (req, res, next) => {
   const family = new FamilySchema({
     id: maxFamilyId,
     name: req.body.name,
+    members: (req.body.members = null),
     image: req.body.image,
-    members: req.body.members,
   });
   family
     .save()
@@ -64,9 +65,10 @@ router.put("/:id", (req, res, next) => {
     id: req.params.id,
   })
     .then((family) => {
+      // family.id = req.body.id;
       family.name = req.body.name;
+      family.members = (req.body.members = null);
       family.image = req.body.image;
-      family.members = req.body.members;
 
       FamilySchema.updateOne({ id: req.params.id }, family)
         .then(() => {

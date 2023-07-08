@@ -44,73 +44,72 @@ Here's a suggestion for an HTML Bootstrap layout for the provided information:
 
  -->
 
-  <div class="container">
-    <div class="row mt-4">
-      <div class="col">
-        <h3>Details</h3>
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <td>{{event?.name}}</td>
-            </tr>
-            <tr>
-              <th>Date</th>
-              <td>{{event?.date | date : 'short'}}</td>
-            </tr>
-            <tr>
-              <th>Time</th>
-              <td>{{event?.time}}</td>
-            </tr>
-            <tr>
-              <th>Duration</th>
-              <td>{{event?.duration | date : 'short'}}</td>
-            </tr>
-            <tr>
-              <th>Location</th>
-              <td>{{event?.location}}</td>
-            </tr>
-            <tr>
-              <th>Details</th>
-              <td>{{event?.details}}</td>
-            </tr>
-            <tr>
-              <th>Family</th>
-              <td>{{event?.belongsTo.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+      <h3>Details</h3>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <td>{{ event?.name }}</td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td>{{ event?.date | date : "short" }}</td>
+          </tr>
+          <tr>
+            <th>Time</th>
+            <td>{{ event?.time }}</td>
+          </tr>
+          <tr>
+            <th>Duration</th>
+            <td>{{ event?.duration | date : "short" }}</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>{{ event?.location }}</td>
+          </tr>
+          <tr>
+            <th>Details</th>
+            <td>{{ event?.details }}</td>
+          </tr>
+          <tr>
+            <th>Family</th>
+            <td>{{ event?.belongsTo.name }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row" *ngIf="event?.members && event?.members.length > 0">
-      <div class="col">
-        <h5>Event Members</h5>
-        <table class="table table-bordered" >
-          <thead >
-            <tr>
-              <th>Names</th>
+  </div>
+  <div class="row" *ngIf="event?.members && event?.members.length > 0">
+    <div class="col">
+      <h5>Event Members</h5>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Names</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let member of event.members">
+          <tr>
+            <td>{{ member.name }}</td>
+          </tr>
 
-            </tr>
-          </thead>
-          <tbody *ngFor="let member of event.members">
-            <tr >
-              <td>{{member?.name}}</td>
-            </tr>
-
-            <!-- Add more members if needed -->
-          </tbody>
-        </table>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a
-            [routerLink]="['edit']"
-            style="cursor: pointer"
-            class="btn btn-primary me-md-2"
-            >Edit</a
-          >
-          <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
-            >Delete</a
-          >
-        </div>
+          <!-- Add more members if needed -->
+        </tbody>
+      </table>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a
+          [routerLink]="['edit']"
+          style="cursor: pointer"
+          class="btn btn-primary me-md-2"
+          >Edit</a
+        >
+        <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
+          >Delete</a
+        >
       </div>
     </div>
   </div>
+</div>

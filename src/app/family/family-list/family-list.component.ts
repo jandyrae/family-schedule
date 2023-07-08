@@ -20,7 +20,7 @@ export class FamilyListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.families = this.familyService.getFamilies();
+    this.familyService.getFamilies();
     this.familyService.familyChanged.subscribe((families: Family[]) => {
       this.families = families;
     });

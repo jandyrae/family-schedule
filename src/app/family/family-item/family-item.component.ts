@@ -12,8 +12,9 @@ export class FamilyItemComponent {
   @Input() family: Family;
   @Input() id: string;
   @Output() familySelected = new Subject<void>();
-  constructor(private familyService: FamilyService) {}
+  // constructor(private familyService: FamilyService) {}
   onSelected() {
     this.familySelected.next();
+    // this.familyService.familySelected.next(this.family);
   }
 }

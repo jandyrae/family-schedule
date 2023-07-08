@@ -69,7 +69,7 @@ export class EventService {
         next: (value) => {
           this.events = value;
           this.events.sort((a,b) => a.date > b.date ? 1: -1);
-          // this.eventsChanged.next([...this.events]);
+          this.eventsChanged.next([...this.events]);
 
         },
         error: (err) => {
@@ -83,20 +83,6 @@ export class EventService {
   }
 
   addEvent(eventData: Event) {
-    // const newEvent: Event = {
-    //   id: this.maxId.toString(),
-    //   name: eventData.name,
-    //   date: eventData.date,
-    //   time: eventData.time,
-    //   duration: eventData.duration,
-    //   location: eventData.location,
-    //   details: eventData.details,
-    //   belongsTo: eventData.belongsTo,
-    //   members: eventData.members,
-    // };
-
-    // // Add the new event to your events array or perform any other desired actions
-    // this.events.push(newEvent);
     if (!eventData) {
       return;
     }
