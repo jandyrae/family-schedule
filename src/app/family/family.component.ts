@@ -5,16 +5,16 @@ import { FamilyService } from './family.service';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
-  styleUrls: ['./family.component.css']
+  styleUrls: ['./family.component.css'],
 })
 export class FamilyComponent implements OnInit {
-selectedFamily: Family;
+  selectedFamily: Family;
 
-constructor(private familyService: FamilyService) { }
+  constructor(private familyService: FamilyService) {}
 
-ngOnInit(): void {
-  this.familyService.familySelected.subscribe((family: Family) => {
-    this.selectedFamily = family;
-  });
-}
+  ngOnInit(): void {
+    this.familyService.familySelected.subscribe((family: Family) => {
+      this.selectedFamily = family;
+    });
+  }
 }

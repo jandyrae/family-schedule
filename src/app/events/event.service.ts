@@ -34,15 +34,15 @@ export class EventService {
     // return this.events.find((event) => event.id === id);
     this.http
       .get<{ message: string; event: Event }>(`http://127.0.0.1:3000/events/${id}`)
-      .pipe(
-        map((result) => {
-          const event: Event = result.event;
-          return event;
-        })
-      )
+      // .pipe(
+      //   map((result) => {
+      //     const event: Event = result.event;
+      //     return event;
+      //   })
+      // )
       .subscribe({
         next: (value) => {
-          this.event = value;
+          this.event = value.event;
 
         },
         error: (err) => {

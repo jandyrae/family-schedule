@@ -20,6 +20,7 @@ import { MemberItemComponent } from './members/member-item/member-item.component
 import { FamilyListComponent } from './family/family-list/family-list.component';
 import { FamilyDetailComponent } from './family/family-detail/family-detail.component';
 import { FamilyEditComponent } from './family/family-edit/family-edit.component';
+import { FamilyItemComponent } from './family/family-item/family-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FamilyEditComponent } from './family/family-edit/family-edit.component'
     MemberItemComponent,
     FamilyListComponent,
     FamilyDetailComponent,
-    FamilyEditComponent
+    FamilyEditComponent,
+    FamilyItemComponent
   ],
   imports: [
     BrowserModule,

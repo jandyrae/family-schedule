@@ -20,11 +20,11 @@ maxFamilyId = 0;
   }
 
   getFamilies(): Family[] {
-    this.http.get<{message: String, families: Family[]}>(
+    this.http.get<{message: String, family: Family[]}>(
       'http://127.0.0.1:3000/family')
       .subscribe({
         next: (value) => {
-          this.allFamilies = value.families;
+          this.allFamilies = value.family;
           this.allFamilies.sort((a,b) => a.name > b.name ? 1 : -1 );
           this.familyChanged.next([...this.allFamilies]);
 

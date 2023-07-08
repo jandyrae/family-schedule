@@ -11,6 +11,17 @@
         </ul>
 
       </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a
+          [routerLink]="['edit']"
+          style="cursor: pointer"
+          class="btn btn-primary me-md-2"
+          >Edit</a
+        >
+        <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
+          >Delete</a
+        >
+      </div>
     </div>
   </div>
 </div>

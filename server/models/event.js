@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const Family = require("./family");
 
 const eventSchema = new Schema({
   id: { type: String, required: true },

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-6">
+
+    <div class="border border-2">
+      <a
+        style="cursor: pointer"
+        routerLinkActive="active"
+        [routerLink]="[family.id]"
+        class="list-group-item clearfix"
+        (click)="onSelected()"
+      >
+        <div class="text-center mt-3">
+          <h4 class="list-group-item-heading">{{ family.name }}</h4>
+          <p class="list-group-item-text" *ngFor="let member of family.members">{{ member.name }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
