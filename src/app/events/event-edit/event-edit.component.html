@@ -80,14 +80,19 @@
 
           <div>
             <label for="belongsTo">Belongs to:</label>
-            <input
+            <select
               type="text"
               id="belongsTo"
               name="belongsTo"
               class="form-control"
               [ngModel]="event?.belongsTo"
               #belongsTo="ngModel"
-            />
+            >
+            <option
+              *ngFor="let family of memberList"
+              [value]="family.belongsTo._id"
+              >{{ family.belongsTo.name }}</option>
+              </select>
           </div>
 
           <div id="unableToAdd" class="alert alert-danger" hidden></div>
@@ -98,12 +103,12 @@
               name="members"
               multiple
               class="form-control"
-              multiple
+
               [ngModel]="event?.members"
               #members="ngModel"
             >
-              <option *ngFor="let member of this.memberList" [value]="member.name">
-                {{ member.name }}
+              <option *ngFor="let members of memberList" [value]="members._id">
+                {{ members.name }}
               </option>
             </select>
           </div>

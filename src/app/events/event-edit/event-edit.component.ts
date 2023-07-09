@@ -38,16 +38,26 @@ export class EventEditComponent implements OnInit {
       if (!this.event) {
         return;
       }
-      this.editMode=true;
+      this.editMode = true;
       // clone by json
-      // this.memberList =
-      this.memberService.getMembers();
+      console.log(this.memberList);
+      this.memberList = this.memberService.getMembers();
     });
   }
 
   onSubmitEvent(form: NgForm) {
     const value = form.value;
-
+    this.event = new Event(
+      this.id,
+      value.name,
+      value.date,
+      value.time,
+      value.duration,
+      value.location,
+      value.details,
+      value.belongsTo,
+      value.members
+    );
     const newEvent = new Event(
       '',
       value.name,
@@ -57,12 +67,12 @@ export class EventEditComponent implements OnInit {
       value.location,
       value.details,
       value.belongsTo,
-      (value.members = null)
+      value.members
     );
 
     if (this.editMode) {
       //update event
-      this.eventService.updateEvent(this.event.toString() , newEvent);
+      this.eventService.updateEvent(this.event, newEvent);
     } else {
       //create new event
       this.eventService.addEvent(newEvent);

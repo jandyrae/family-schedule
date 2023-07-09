@@ -3,6 +3,7 @@ import { Event } from './event.model';
 import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MemberService } from '../members/member.service';
+import * as e from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +16,8 @@ export class EventService {
   currentId: number;
   maxId = 0;
 
-  constructor(private http: HttpClient,
-    private memberService: MemberService) {
+  constructor(private http: HttpClient, private memberService: MemberService) {
     this.maxId = this.getMaxId();
-
   }
   getMaxId(): number {
     this.events.forEach((event) => {
@@ -68,9 +67,8 @@ export class EventService {
       .subscribe({
         next: (value) => {
           this.events = value;
-          this.events.sort((a,b) => a.date > b.date ? 1: -1);
+          this.events.sort((a, b) => (a.date > b.date ? 1 : -1));
           this.eventsChanged.next([...this.events]);
-
         },
         error: (err) => {
           console.log(err);
@@ -112,9 +110,38 @@ export class EventService {
       });
   }
 
-  updateEvent(id: string, editedEvent: Event) {
-    this.events[id] = editedEvent;
-    this.eventsChanged.next(this.events.slice());
+  updateEvent(originalEvent: Event, editedEvent: Event) {
+    if (!originalEvent || !editedEvent) {
+      return;
+    }
+    const pos = this.events.findIndex((d) => d.id === originalEvent.id);
+    if (pos < 0) {
+      return;
+    }
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    editedEvent.id = originalEvent.id;
+    this.http
+      .put(
+        `http://127.0.0.1:3000/events/${originalEvent.id}`,
+        editedEvent,
+        headers
+      )
+      .subscribe({
+        next: (n) => {
+          this.events[pos] = editedEvent;
+          this.events.sort((a, b) => (b.date < a.date ? 1 : -1));
+          this.eventsChanged.next([...this.events]);
+        },
+        error: (e) => console.error(Error, 'an error occurred' + e),
+        complete: () => {
+          console.log('updateEvent succeeded');
+        },
+      });
+    // this.eventsChanged.next(this.events.slice());
   }
 
   deleteEvent(id: string) {

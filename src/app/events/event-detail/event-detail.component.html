@@ -42,10 +42,21 @@
 Here's a suggestion for an HTML Bootstrap layout for the provided information:
 
 
- -->
+-->
 
 <div class="container">
   <div class="row mt-4">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a
+        [routerLink]="['edit']"
+        style="cursor: pointer"
+        class="btn btn-primary me-md-2"
+        >Edit</a
+      >
+      <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
+        >Delete</a
+      >
+    </div>
     <div class="col">
       <h3>Details</h3>
       <table class="table table-bordered">
@@ -76,13 +87,13 @@ Here's a suggestion for an HTML Bootstrap layout for the provided information:
           </tr>
           <tr>
             <th>Family</th>
-            <td>{{ event?.belongsTo.name }}</td>
+            <td>{{ event.belongsTo?.name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="row" *ngIf="event?.members && event?.members.length > 0">
+  <div class="row" *ngIf="event.members && event.members.length > 0">
     <div class="col">
       <h5>Event Members</h5>
       <table class="table table-bordered">
@@ -93,23 +104,12 @@ Here's a suggestion for an HTML Bootstrap layout for the provided information:
         </thead>
         <tbody *ngFor="let member of event.members">
           <tr>
-            <td>{{ member?.name }}</td>
+            <td>{{ member.name }}</td>
           </tr>
 
           <!-- Add more members if needed -->
         </tbody>
       </table>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a
-          [routerLink]="['edit']"
-          style="cursor: pointer"
-          class="btn btn-primary me-md-2"
-          >Edit</a
-        >
-        <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
-          >Delete</a
-        >
-      </div>
     </div>
   </div>
 </div>

@@ -49,7 +49,7 @@ router.post("/", (req, res, next) => {
     location: req.body.location,
     details: req.body.details,
     belongsTo: req.body.belongsTo,
-    members: (req.body.members = null),
+    members: req.body.members,
   });
   event
     .save()
@@ -67,7 +67,7 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.put("/:id", (res, req, next) => {
+router.put("/:id", (req, res, next) => {
   EventSchema.findOne({
     id: req.params.id,
   })
@@ -79,7 +79,7 @@ router.put("/:id", (res, req, next) => {
       event.location = req.body.location;
       event.details = req.body.details;
       event.belongsTo = req.body.belongsTo;
-      event.members = req.body.members = null;
+      event.members = req.body.members;
 
       EventSchema.updateOne({ id: req.params.id }, event)
         .then(() => {
