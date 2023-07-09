@@ -5,6 +5,8 @@ import { Event } from '../event.model';
 import { NgForm } from '@angular/forms';
 import { EventService } from '../event.service';
 import { MemberService } from 'src/app/members/member.service';
+import { Family } from 'src/app/family/family.model';
+import { FamilyService } from 'src/app/family/family.service';
 
 @Component({
   selector: 'app-event-edit',
@@ -19,10 +21,12 @@ export class EventEditComponent implements OnInit {
   id: string;
   member: Member;
   memberList: Member[] = [];
+  familyList: Family[] = [];
 
   constructor(
     private eventService: EventService,
     private memberService: MemberService,
+    private familyService: FamilyService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -39,9 +43,10 @@ export class EventEditComponent implements OnInit {
         return;
       }
       this.editMode = true;
-      // clone by json
+
       console.log(this.memberList);
       this.memberList = this.memberService.getMembers();
+      this.familyList = this.familyService.getFamilies();
     });
   }
 

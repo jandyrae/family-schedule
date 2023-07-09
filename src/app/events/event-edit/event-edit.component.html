@@ -89,9 +89,9 @@
               #belongsTo="ngModel"
             >
             <option
-              *ngFor="let family of memberList"
-              [value]="family.belongsTo._id"
-              >{{ family.belongsTo.name }}</option>
+              *ngFor="let family of familyList"
+              [value]="family._id"
+              >{{ family.name }}</option>
               </select>
           </div>
 

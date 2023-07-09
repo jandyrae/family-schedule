@@ -42,7 +42,7 @@ router.post("/", (req, res, next) => {
   const family = new FamilySchema({
     id: maxFamilyId,
     name: req.body.name,
-    members: (req.body.members = null),
+    members: req.body.members,
     image: req.body.image,
   });
   family

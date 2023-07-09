@@ -98,7 +98,7 @@ export class EventService {
       )
       .subscribe({
         next: (n) => {
-          // this.events.push(n.eventData);
+          this.events.push(n.eventData);
           console.log(n.message);
           this.events.sort((a, b) => (b.date < a.date ? 1 : -1));
           this.events = this.getEvents();
