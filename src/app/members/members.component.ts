@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Member } from './member.model';
 import { MemberService } from './member.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-members',
@@ -10,11 +11,14 @@ import { MemberService } from './member.service';
 })
 export class MembersComponent implements OnInit {
   selectedMember: Member;
+  exports:[FormsModule];
 
   constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
-    this.memberService.memberSelected.subscribe((member: Member) => {
+    // this.memberService.getMembers();
+    this.memberService.memberSelected
+    .subscribe((member: Member) => {
       this.selectedMember = member;
     });
   }

@@ -15,8 +15,8 @@
         <h6>Belongs to Family:</h6>
         <p>{{ member?.belongsTo.name }}</p>
         <h6>Events:</h6>
-        <ul>
-          <li *ngFor="let event of member?.events">{{ event?.name }}</li>
+        <ul *ngFor="let event of member?.events">
+          <li >{{ event?.name }}</li>
         </ul>
       </div>
     </div>

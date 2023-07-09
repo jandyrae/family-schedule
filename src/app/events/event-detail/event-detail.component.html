@@ -93,7 +93,7 @@ Here's a suggestion for an HTML Bootstrap layout for the provided information:
         </thead>
         <tbody *ngFor="let member of event.members">
           <tr>
-            <td>{{ member.name }}</td>
+            <td>{{ member?.name }}</td>
           </tr>
 
           <!-- Add more members if needed -->

@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class MemberListComponent implements OnInit {
   members: Member[] = [];
+  member: Member;
   id: string;
 
   constructor(
@@ -26,8 +27,13 @@ export class MemberListComponent implements OnInit {
     });
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
+      // this.memberService.getMemberById(this.id)
+      // .subscribe((member) => {
+      //   this.member = member.member;
+      // })
     });
-    // console.log(this.members);
+
+
   }
 
   onNewMember() {

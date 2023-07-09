@@ -6,7 +6,7 @@ const MemberSchema = require("../models/member");
 
 router.get("/", (req, res, next) => {
   MemberSchema.find()
-    .populate("belongsTo")
+    .populate(["belongsTo"])
     .then((members) => {
       res.status(200).json({
         message: "members retrieval success",
@@ -21,7 +21,7 @@ router.get("/", (req, res, next) => {
 });
 router.get("/:id", (req, res, next) => {
   MemberSchema.findOne({
-    id: req.params.id
+    id: req.params.id,
   })
     .populate("belongsTo")
     .then((member) => {
@@ -37,7 +37,7 @@ router.get("/:id", (req, res, next) => {
     });
 });
 
-router.post("/", (req, res, next)=> {
+router.post("/", (req, res, next) => {
   const maxMemberId = sequenceGenerator.nextId("members");
   const member = new MemberSchema({
     id: maxMemberId,
@@ -49,19 +49,20 @@ router.post("/", (req, res, next)=> {
     image: req.body.image,
     events: (req.body.events = null),
   });
-  member.save()
-  .then((newMember)=>{
-    res.status(201).json({
-      message: "Member added successfully",
-      member:newMember,
+  member
+    .save()
+    .then((newMember) => {
+      res.status(201).json({
+        message: "Member added successfully",
+        member: newMember,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "An error occurred saving the member",
+        error: err,
+      });
     });
-  }).catch((err) => {
-    res.status(500).json({
-      message: "An error occurred saving the member",
-      error: err,
-    });
-  });
-
 });
 
 router.put("/:id", (req, res, next) => {
@@ -73,23 +74,19 @@ router.put("/:id", (req, res, next) => {
       member.phone = req.body.phone;
       member.address = req.body.address;
       member.image = req.body.image;
-      member.events = (req.body.events = null);
-    })
-    .then((member) => {
-      res.status(204).json({
-        message: "Member updated successfully",
-        member: member,
+      member.events = req.body.events;
+
+      MemberSchema.updateOne({ id: req.params.id }, member).then((member) => {
+        res.status(204).json({
+          message: "Member updated successfully",
+          member: member,
+        });
       });
     })
     .catch((err) => {
       res.status(500).json({
         message: "An error occurred updating the member",
         error: err,
-      });
-    }).catch((error) => {
-      res.status(500).json({
-        message: "Member not found.",
-        error: { member: "Member not found", error },
       });
     });
 });

@@ -24,16 +24,25 @@ export class MemberEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
+      if (!params) {
+        this.editMode = false;
+        return;
+      }
       this.member = this.memberService.getMember(this.id);
+      if (!this.member) {
+        return;}
+      this.editMode = true;
+      console.log(this.editMode, 'editMode');
     });
   }
+
   onMemberEdit() {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onSubmitMember(form: NgForm) {
     const value = form.value;
-    const newMember = new Member(
+    this.member = new Member(
       '',
       value.name,
       value.belongsTo,
@@ -41,14 +50,28 @@ export class MemberEditComponent implements OnInit {
       value.phone,
       value.address,
       value.image,
-      (value.events = null)
+      value.events = null
     );
-    if (!this.editMode) {
-      this.memberService.addMember(newMember);
-    } // add or update
+    const editedMember = new Member(
+      this.id,
+      value.name,
+      value.belongsTo,
+      value.email,
+      value.phone,
+      value.address,
+      value.image,
+      value.events
+    );
+    if (this.editMode) {
+      this.memberService.updateMember(editedMember, this.member);
+    } else {
+      // add new member
+      this.memberService.addMember(this.member);
+    }
+
     this.editMode = false;
     form.reset();
     this.router.navigate(['/members']);
-    this.members = this.memberService.getMembers();
+    // this.memberService.getMembers();
   }
 }

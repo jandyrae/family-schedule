@@ -14,8 +14,10 @@ export class MemberService {
   maxMemberId = 0;
   constructor(private http: HttpClient) {}
 
-  getMember(id: string): Member {
-    // return this.members.find((member) => member.id === id);
+  getMember(id: string) {
+    return this.members.find((member) => member.id === id);
+  }
+  getMemberById(id: string): Member {
     this.http
       .get<{ message: String; member: Member }>(
         `http://127.0.0.1:3000/members/${id}`
@@ -49,7 +51,7 @@ export class MemberService {
       .subscribe({
         next: (value) => {
           this.members = value;
-          this.members.sort((a, b) => (a.name > b.name ? 1 : -1));
+          this.members.sort((a, b) => (a.id > b.id ? 1 : -1));
           this.membersChanged.next([...this.members]);
         },
         error: (err) => console.error(err),
@@ -85,5 +87,54 @@ export class MemberService {
           this.membersChanged.next([...this.members]);
         },
       });
+  }
+
+  updateMember(originalMember: Member, editedMember: Member) {
+    if (!originalMember || !editedMember) {
+      return;
+    }
+    const pos = this.members.findIndex((m) => m.id === originalMember.id);
+    if (pos < 0) {
+      return;
+    }
+    editedMember.id = originalMember.id;
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    this.http
+      .put(
+        `http://127.0.0.1:3000/members/${originalMember.id}`,
+        editedMember,
+        headers
+      )
+      .subscribe({
+        next: (n) => {
+          this.members[pos] = editedMember;
+          console.log(n, 'updated');
+          this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
+          this.membersChanged.next([...this.members]);
+        },
+        error: (e) => console.error(Error, 'an error occurred' + e),
+      });
+  }
+
+  deleteMember(member: Member) {
+    if (!member) {
+      return;
+    }
+    const pos = this.members.findIndex((m) => m.id === member.id);
+    if (pos < 0) {
+      return;
+    }
+    this.http.delete(`http://127.0.0.1:3000/members/${member.id}`).subscribe({
+      next: (n) => {
+        this.members.splice(pos, 1);
+        this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
+        this.membersChanged.next([...this.members]);
+      },
+      error: (e) => console.error(Error, 'an error occurred' + e),
+    });
   }
 }

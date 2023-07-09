@@ -31,28 +31,28 @@ export class EventService {
   }
 
   getEvent(id: string): Event {
-    // return this.events.find((event) => event.id === id);
-    this.http
-      .get<{ message: string; event: Event }>(`http://127.0.0.1:3000/events/${id}`)
-      // .pipe(
-      //   map((result) => {
-      //     const event: Event = result.event;
-      //     return event;
-      //   })
-      // )
-      .subscribe({
-        next: (value) => {
-          this.event = value.event;
+    return this.events.find((event) => event.id === id);
+    // this.http
+    //   .get<{ message: string; event: Event }>(`http://127.0.0.1:3000/events/${id}`)
+    //   // .pipe(
+    //   //   map((result) => {
+    //   //     const event: Event = result.event;
+    //   //     return event;
+    //   //   })
+    //   // )
+    //   .subscribe({
+    //     next: (value) => {
+    //       this.event = value.event;
 
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete() {
-          console.log('getEvent succeeded');
-        },
-      });
-    return this.event;
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //     },
+    //     complete() {
+    //       console.log('getEvent succeeded');
+    //     },
+    //   });
+    // return this.event;
   }
 
   getEvents(): Event[] {

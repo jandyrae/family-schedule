@@ -19,7 +19,7 @@ constructor (
 ngOnInit(): void {
   this.route.params.subscribe((params:Params) => {
     this.id = params['id'];
-    this.member= this.memberService.getMember(this.id);
+    this.member = this.memberService.getMember(this.id);
   })
 }
 onMemberEdit() {
