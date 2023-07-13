@@ -5,50 +5,51 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Enter name"
-        required
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Enter name"
+      required
         [ngModel]="member?.name"
         name="name"
         #name="ngModel"
-      />
-    </div>
-    <div class="form-group">
-      <label for="belongsTo">Family</label>
-      <select
+        />
+      </div>
+      <div class="form-group">
+        <label for="belongsTo">Family</label>
+        <select
         class="form-control"
         id="belongsTo"
         required
         [ngModel]="member?.belongsTo"
         name="belongsTo"
         #belongsTo="ngModel"
-      >
+        >
         <!-- Add options for family selection -->
-        <option value="64a71b204f502ac3e7d78782">Randy and Jaynann Perrett</option>
-        <option value="64a71bdb4f502ac3e7d78785">Jorden and Marissa Perrett</option>
-        <option value="64a71c3a4f502ac3e7d78786">Jason and Jandy Kiger</option>
-        <option value="64a71c7e4f502ac3e7d78787">Joe and Jaquelle Dodge</option>
-        <option value="64a71cc64f502ac3e7d78788">Stephen and Michelle Perrett</option>
-        <option value="64a9daf0894b2b732a236c40">Mateo and Sharina Perrett</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        placeholder="Enter email"
-        [ngModel]="member?.email"
-        name="email"
-        #email="ngModel"
-      />
-    </div>
-    <div class="form-group">
-      <label for="phone">Phone</label>
-      <input
+        <option
+        default="Select a family"
+        *ngFor="let family of familyList"
+        [value]="family._id"
+        >
+        {{ family.name }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+    type="email"
+    class="form-control"
+    id="email"
+    placeholder="Enter email"
+    [ngModel]="member?.email"
+    name="email"
+    #email="ngModel"
+    />
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input
         type="tel"
         class="form-control"
         id="phone"
@@ -56,11 +57,11 @@
         [ngModel]="member?.phone"
         name="phone"
         #phone="ngModel"
-      />
-    </div>
-    <div class="form-group">
-      <label for="address">Address</label>
-      <input
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
         type="text"
         class="form-control"
         id="address"
@@ -68,11 +69,11 @@
         [ngModel]="member?.address"
         name="address"
         #address="ngModel"
-      />
-    </div>
-    <div class="form-group">
-      <label for="image">Image URL</label>
-      <input
+        />
+      </div>
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input
         type="text"
         class="form-control"
         id="image"
@@ -80,19 +81,19 @@
         [ngModel]="member?.image"
         name="image"
         #image="ngModel"
-      />
-    </div>
-    <!-- add events to the member -->
-    <!-- <div class="form-group">
-      <label for="events">Events</label>
-      <textarea
+        />
+      </div>
+      <!-- add events to the member -->
+      <div class="form-group">
+        <label for="events">Events</label>
+        <select
         class="form-control"
         id="events"
         [ngModel]="member?.events"
         name="events"
         #events="ngModel"
-      ></textarea>
-    </div> -->
-    <button type="submit" class="btn btn-primary" >Submit</button>
-  </form>
-</div>
+        ></select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>

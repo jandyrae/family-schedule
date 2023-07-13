@@ -32,6 +32,8 @@ export class EventEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.memberList = this.memberService.getMembers();
+    this.familyList = this.familyService.getFamilies();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       if (!params) {
@@ -45,8 +47,6 @@ export class EventEditComponent implements OnInit {
       this.editMode = true;
 
       console.log(this.memberList);
-      this.memberList = this.memberService.getMembers();
-      this.familyList = this.familyService.getFamilies();
     });
   }
 
@@ -117,5 +117,10 @@ export class EventEditComponent implements OnInit {
     }
     message.style.display = 'none';
     this.memberList.push(selectedMember);
+  }
+
+  onDeleteEvent() {
+    this.eventService.deleteEvent(this.event.id);
+    this.router.navigate(['/events']);
   }
 }

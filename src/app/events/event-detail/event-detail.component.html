@@ -1,64 +1,8 @@
-<!-- <div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
-        <h4>{{ event?.name }}</h4>
-
-        <div class="pull-right btn-toolbar">
-          <a
-            [routerLink]="['edit']"
-            style="cursor: pointer"
-            class="btn btn-primary"
-            >Edit</a
-          >
-          <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
-            >Delete</a
-          >
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="list-group-item-heading"><b>Name: </b> {{ event?.name }}</div>
-        <div class="list-group-item-heading"><b>Date: </b> {{ event?.date | date:'short'}}</div>
-        <div class="list-group-item-heading"><b>Time: </b>{{ event?.time }}</div>
-        <div class="list-group-item-heading">
-          <b>Location: </b>{{ event?.location }}
-        </div>
-        <div class="list-group-item-heading"><b>Details: </b> {{ event?.details }}</div>
-        <div class="list-group-item-heading">
-          <b>Family: </b>{{ event?.belongsTo }}
-        </div>
-      </div>
-      <div *ngIf="event?.members && event?.members.length > 0">
-        <h6>Event Members:</h6>
-        <ul>
-          <li *ngFor="let each of members">
-            <p>{{ member.name }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-Here's a suggestion for an HTML Bootstrap layout for the provided information:
-
-
--->
 
 <div class="container">
-  <div class="row mt-4">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a
-        [routerLink]="['edit']"
-        style="cursor: pointer"
-        class="btn btn-primary me-md-2"
-        >Edit</a
-      >
-      <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
-        >Delete</a
-      >
-    </div>
-    <div class="col">
-      <h3>Details</h3>
+  <div class="card">
+    <div class="card-header">
+      <h3>Details</h3></div>
       <table class="table table-bordered">
         <tbody>
           <tr>
@@ -87,29 +31,41 @@ Here's a suggestion for an HTML Bootstrap layout for the provided information:
           </tr>
           <tr>
             <th>Family</th>
-            <td>{{ event.belongsTo?.name }}</td>
+            <td *ngIf="event.belongsTo">{{ event.belongsTo?.name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="row" *ngIf="event.members && event.members.length > 0">
-    <div class="col">
-      <h5>Event Members</h5>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Names</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let member of event.members">
-          <tr>
-            <td>{{ member.name }}</td>
-          </tr>
+    <div class="card">
+      <a
+    [routerLink]="['edit']"
+    style="cursor: pointer"
+    class="btn btn-outline-primary"
+    >Edit</a
+    >
+    <a style="cursor: pointer" class="btn btn-outline-danger" (click)="onDelete()"
+    >Delete</a
+    >
+    </div>
+    <div class="card" *ngIf="event.members && event.members.length > 0">
+      <div class="card-header">
+        <h5>Event Members</h5>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Names</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let member of event.members">
+            <tr>
+              <td>{{ member.name }}</td>
+            </tr>
 
-          <!-- Add more members if needed -->
-        </tbody>
-      </table>
-    </div>
+            <!-- Add more members if needed -->
+          </tbody>
+        </table>
+
+      </div>
+
   </div>
 </div>

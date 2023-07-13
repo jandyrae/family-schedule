@@ -42,17 +42,20 @@
               #time="ngModel"
             />
           </div>
-
           <div>
-            <label for="duration">Duration:</label>
-            <input
+            <!-- <label for="days">Is event longer than 1 day? </label> -->
+            <!-- <input type="checkbox" name="days" id="days" ngModel="days" /> -->
+            <div ngShow="days">
+              <label for="duration">Duration:</label>
+              <input
               type="date"
               id="duration"
               name="duration"
               class="form-control"
               [ngModel]="event?.duration"
               #duration="ngModel"
-            />
+              />
+            </div>
           </div>
 
           <div>
@@ -88,11 +91,14 @@
               [ngModel]="event?.belongsTo"
               #belongsTo="ngModel"
             >
-            <option
-              *ngFor="let family of familyList"
-              [value]="family._id"
-              >{{ family.name }}</option>
-              </select>
+              <option
+                default="Select a family"
+                *ngFor="let family of familyList"
+                [value]="family._id"
+              >
+                {{ family.name }}
+              </option>
+            </select>
           </div>
 
           <div id="unableToAdd" class="alert alert-danger" hidden></div>
@@ -103,7 +109,6 @@
               name="members"
               multiple
               class="form-control"
-
               [ngModel]="event?.members"
               #members="ngModel"
             >
@@ -112,10 +117,12 @@
               </option>
             </select>
           </div>
-
+          <hr>
           <button type="submit" class="form-control btn btn-outline-success">
             Submit
           </button>
+          <button type="button" class="form-control btn btn-outline-danger"(click)="onDeleteEvent()">Delete</button>
+
         </div>
       </div>
     </form>

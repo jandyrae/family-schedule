@@ -6,7 +6,7 @@ const MemberSchema = require("../models/member");
 
 router.get("/", (req, res, next) => {
   MemberSchema.find()
-    .populate(["belongsTo"])
+    .populate(["belongsTo", "events"])
     .then((members) => {
       res.status(200).json({
         message: "members retrieval success",
@@ -47,7 +47,7 @@ router.post("/", (req, res, next) => {
     phone: req.body.phone,
     address: req.body.address,
     image: req.body.image,
-    events: (req.body.events = null),
+    events: req.body.events,
   });
   member
     .save()

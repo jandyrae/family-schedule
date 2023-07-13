@@ -1,31 +1,33 @@
-<div class="card">
-  <div class="card-header">
-    <h5>{{ member?.name }}</h5>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6">
-        <img *ngIf="member?.image" [src]="member?.image" class="img-fluid" alt="{{member?.name}}">
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h5>{{ member?.name }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <img *ngIf="member?.image" [src]="member?.image" class="img-fluid" alt="{{member?.name}}">
 
-        <p><strong>Email:</strong> {{ member?.email }}</p>
-        <p><strong>Phone:</strong> {{ member?.phone }}</p>
-        <p><strong>Address:</strong> {{ member?.address }}</p>
-      </div>
-      <div class="col-md-8">
-        <h6>Belongs to Family:</h6>
-        <p>{{ member?.belongsTo.name }}</p>
-        <h6>Events:</h6>
-        <ul *ngFor="let event of member?.events">
-          <li >{{ event?.name }}</li>
-        </ul>
+          <p><strong>Email:</strong> {{ member?.email }}</p>
+          <p><strong>Phone:</strong> {{ member?.phone }}</p>
+          <p><strong>Address:</strong> {{ member?.address }}</p>
+        </div>
+        <div class="col-md-8">
+          <h6>Belongs to Family:</h6>
+          <p *ngIf="member.belongsTo">{{ member.belongsTo.name }}</p>
+          <h6>Events:</h6>
+          <ul *ngFor="let event of member?.events">
+            <li *ngIf="member.events">{{ event.name }}</li>
+          </ul>
+        </div>
       </div>
     </div>
+    <a
+    [routerLink]="['edit']"
+    style="cursor: pointer"
+    class="btn btn-outline-primary"
+    >Edit</a
+  >
   </div>
-  <a
-  [routerLink]="['edit']"
-  style="cursor: pointer"
-  class="btn btn-primary me-md-2"
-  >Edit</a
->
 </div>
 

@@ -5,9 +5,9 @@ export class Event {
   constructor(
     public id: string,
     public name: string,
-    public date: Date,
+    public date: string,
     public time: string,
-    public duration: Date,
+    public duration: string,
     public location: string,
     public details: string,
     public belongsTo: Family,

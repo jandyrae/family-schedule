@@ -77,10 +77,10 @@ export class MemberService {
       )
       .subscribe({
         next: (n) => {
-          // this.members.push(n.member);
+          this.members.push(n.member);
           console.log(n.message);
-          // this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
-          // this.members = this.getMembers();
+          this.members.sort((a, b) => (b.id < a.id ? 1 : -1));
+          this.members = this.getMembers();
         },
         error: (e) => console.error(Error, 'an error occurred' + e),
         complete: () => {
@@ -117,6 +117,7 @@ export class MemberService {
           this.membersChanged.next([...this.members]);
         },
         error: (e) => console.error(Error, 'an error occurred' + e),
+        complete: () => { console.log('complete'); },
       });
   }
 

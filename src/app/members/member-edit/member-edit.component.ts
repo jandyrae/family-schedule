@@ -1,8 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../member.model';
 import { NgForm } from '@angular/forms';
 import { MemberService } from '../member.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { EventService } from 'src/app/events/event.service';
+import { Event } from 'src/app/events/event.model';
+import { Family } from 'src/app/family/family.model';
+import { FamilyService } from 'src/app/family/family.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -11,17 +15,25 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class MemberEditComponent implements OnInit {
   @Input() member: Member;
+  @ViewChild('memberForm') memberForm: NgForm;
   id: string;
   members: Member[];
+  events: Event[];
   editMode = false;
+  familyList: Family[] = [];
 
   constructor(
     private memberService: MemberService,
+    private eventService: EventService,
+    private familyService: FamilyService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.members = this.memberService.getMembers();
+    this.familyList = this.familyService.getFamilies();
+    // this.events = this.eventService.getEvents();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       if (!params) {
@@ -43,17 +55,17 @@ export class MemberEditComponent implements OnInit {
   onSubmitMember(form: NgForm) {
     const value = form.value;
     this.member = new Member(
-      '',
+      this.id,
       value.name,
       value.belongsTo,
       value.email,
       value.phone,
       value.address,
       value.image,
-      value.events = null
+      value.events,
     );
-    const editedMember = new Member(
-      this.id,
+    const newMember = new Member(
+      '',
       value.name,
       value.belongsTo,
       value.email,
@@ -63,15 +75,21 @@ export class MemberEditComponent implements OnInit {
       value.events
     );
     if (this.editMode) {
-      this.memberService.updateMember(editedMember, this.member);
+      this.memberService.updateMember(this.member, newMember );
     } else {
       // add new member
-      this.memberService.addMember(this.member);
+      this.memberService.addMember(newMember);
     }
 
     this.editMode = false;
     form.reset();
     this.router.navigate(['/members']);
-    // this.memberService.getMembers();
+    this.members = this.memberService.getMembers();
   }
+
+  // onDeleteMember() {
+  //  this.eventService.deleteEvent(this.member.id);
+  //  this.memberService.membersChanged.next(this.members.slice());
+  // }
+
 }

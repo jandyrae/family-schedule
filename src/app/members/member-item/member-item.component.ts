@@ -18,6 +18,6 @@ memberInfo: string;
     this.memberSelected.next();
   }
   ngOnInit(): void {
-    this.memberInfo = this.member?.belongsTo.name;
+    this.memberInfo = this.member.belongsTo?.name;
   }
 }

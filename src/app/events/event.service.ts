@@ -145,6 +145,7 @@ export class EventService {
   }
 
   deleteEvent(id: string) {
+
     this.events.splice(+id, 1);
     this.eventsChanged.next([...this.events]);
   }
