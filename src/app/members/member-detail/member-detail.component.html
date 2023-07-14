@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="position: sticky; top: 7em">
   <div class="card">
     <div class="card-header">
       <h5>{{ member?.name }}</h5>
@@ -12,7 +12,7 @@
           <p><strong>Phone:</strong> {{ member?.phone }}</p>
           <p><strong>Address:</strong> {{ member?.address }}</p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <h6>Belongs to Family:</h6>
           <p *ngIf="member.belongsTo">{{ member.belongsTo.name }}</p>
           <h6>Events:</h6>
@@ -27,7 +27,12 @@
     style="cursor: pointer"
     class="btn btn-outline-primary"
     >Edit</a
-  >
+  > <a
+  style="cursor: pointer"
+  class="btn btn-outline-danger"
+  (click)="onDelete()"
+  >Delete</a
+>
   </div>
 </div>
 

@@ -1,28 +1,34 @@
-<div class="card">
-  <div class="card-header">
-    <h5>{{ family?.name }}</h5>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6">
-        <img
-          *ngIf="family?.image"
-          [src]="family?.image"
-          class="img-fluid"
-          alt="{{ family?.name }}"
-        />
-        <ul>
-          <li *ngFor="let member of family?.members">{{ member?.name }}</li>
-        </ul>
-      </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div class="container" style="position: sticky; top: 7em">
+  <div class="card">
+    <div class="card-header">
+      <h5>{{ family?.name }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <img
+            *ngIf="family?.image"
+            [src]="family?.image"
+            class="img-fluid"
+            [alt]="family?.name"
+          />
+          <h6>Family Members:</h6>
+          <ul *ngFor="let member of family?.members">
+            <li>{{ member?.name }}</li>
+          </ul>
+          <hr />
+        </div>
+
         <a
           [routerLink]="['edit']"
           style="cursor: pointer"
-          class="btn btn-primary me-md-2"
+          class="btn btn-outline-primary"
           >Edit</a
         >
-        <a style="cursor: pointer" class="btn btn-danger" (click)="onDelete()"
+        <a
+          style="cursor: pointer"
+          class="btn btn-outline-danger"
+          (click)="onDelete()"
           >Delete</a
         >
       </div>

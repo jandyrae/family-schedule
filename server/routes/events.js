@@ -6,7 +6,7 @@ const EventSchema = require("../models/event");
 
 router.get("/", (req, res, next) => {
   EventSchema.find()
-    .populate(['belongsTo', 'members'])
+    .populate(["belongsTo", "members"])
     .then((events) => {
       res.status(200).json({
         message: "Events retrieval success",
@@ -24,7 +24,7 @@ router.get("/:id", (req, res, next) => {
   EventSchema.findOne({
     id: req.params.id,
   })
-  .populate(['belongsTo', 'members'])
+    .populate(["belongsTo", "members"])
     .then((event) => {
       res.status(200).json({
         message: "Event retrieval success",
@@ -85,7 +85,6 @@ router.put("/:id", (req, res, next) => {
         .then(() => {
           res.status(204).json({
             message: "Event updated successfully",
-
           });
         })
         .catch((error) => {

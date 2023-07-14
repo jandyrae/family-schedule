@@ -36,7 +36,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   onDelete() {
-    this.eventService.deleteEvent(this.id);
+    this.eventService.deleteEvent(this.event);
     this.router.navigate(['/events']);
   }
 }

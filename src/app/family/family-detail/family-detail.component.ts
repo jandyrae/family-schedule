@@ -29,7 +29,7 @@ export class FamilyDetailComponent implements OnInit {
   }
 
   onDelete(){
-    // this.familyService.deleteFamily(this.id);
-    // this.router.navigate(['../'], { relativeTo: this.route });
+    this.familyService.deleteFamily(this.family);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

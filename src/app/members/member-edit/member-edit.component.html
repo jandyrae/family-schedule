@@ -1,99 +1,120 @@
 <!-- member-form.component.html -->
-<div class="container">
-  <h3>Create Member</h3>
-  <form (ngSubmit)="onSubmitMember(memberForm)" #memberForm="ngForm">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-      type="text"
-      class="form-control"
-      id="name"
-      placeholder="Enter name"
-      required
-        [ngModel]="member?.name"
-        name="name"
-        #name="ngModel"
-        />
-      </div>
-      <div class="form-group">
-        <label for="belongsTo">Family</label>
-        <select
-        class="form-control"
-        id="belongsTo"
-        required
-        [ngModel]="member?.belongsTo"
-        name="belongsTo"
-        #belongsTo="ngModel"
-        >
-        <!-- Add options for family selection -->
-        <option
-        default="Select a family"
-        *ngFor="let family of familyList"
-        [value]="family._id"
-        >
-        {{ family.name }}
-      </option>
-    </select>
+<div class="container" style="position: sticky; top: 7em">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Create Member</h3>
+      <form (ngSubmit)="onSubmitMember(memberForm)" #memberForm="ngForm">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Enter name"
+                required
+                [ngModel]="member?.name"
+                name="name"
+                #name="ngModel"
+              />
+            </div>
+            <div class="form-group">
+              <label for="belongsTo">Family</label>
+              <select
+                class="form-control"
+                id="belongsTo"
+                required
+                [ngModel]="member?.belongsTo"
+                name="belongsTo"
+                #belongsTo="ngModel"
+              >
+                <!-- Add options for family selection -->
+                <option *ngFor="let family of familyList" [value]="family._id">
+                  {{ family.name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter email"
+                [ngModel]="member?.email"
+                name="email"
+                #email="ngModel"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                placeholder="Enter phone number"
+                [ngModel]="member?.phone"
+                name="phone"
+                #phone="ngModel"
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="Enter address"
+                [ngModel]="member?.address"
+                name="address"
+                #address="ngModel"
+              />
+            </div>
+            <div class="form-group">
+              <label for="image">Image URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="image"
+                placeholder="Enter image URL"
+                [ngModel]="member?.image"
+                name="image"
+                #image="ngModel"
+              />
+            </div>
+            <!-- add events to the member -->
+            <div class="form-group">
+              <label for="events">Events</label>
+              <select
+                class="form-control"
+                id="events"
+                [ngModel]="member?.events"
+                name="events"
+                multiple
+              >
+                <option *ngFor="let event of eventList" [value]="event._id">
+                  {{ event.name }}
+                </option>
+              </select>
+              <hr />
+              <button
+                type="submit"
+                class="form-control btn btn-outline-primary"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                class="form-control btn btn-outline-danger"
+                (click)="onDeleteMember()"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input
-    type="email"
-    class="form-control"
-    id="email"
-    placeholder="Enter email"
-    [ngModel]="member?.email"
-    name="email"
-    #email="ngModel"
-    />
-  </div>
-  <div class="form-group">
-    <label for="phone">Phone</label>
-    <input
-        type="tel"
-        class="form-control"
-        id="phone"
-        placeholder="Enter phone number"
-        [ngModel]="member?.phone"
-        name="phone"
-        #phone="ngModel"
-        />
-      </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input
-        type="text"
-        class="form-control"
-        id="address"
-        placeholder="Enter address"
-        [ngModel]="member?.address"
-        name="address"
-        #address="ngModel"
-        />
-      </div>
-      <div class="form-group">
-        <label for="image">Image URL</label>
-        <input
-        type="text"
-        class="form-control"
-        id="image"
-        placeholder="Enter image URL"
-        [ngModel]="member?.image"
-        name="image"
-        #image="ngModel"
-        />
-      </div>
-      <!-- add events to the member -->
-      <div class="form-group">
-        <label for="events">Events</label>
-        <select
-        class="form-control"
-        id="events"
-        [ngModel]="member?.events"
-        name="events"
-        #events="ngModel"
-        ></select>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
+</div>

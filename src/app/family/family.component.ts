@@ -13,7 +13,8 @@ export class FamilyComponent implements OnInit {
   constructor(private familyService: FamilyService) {}
 
   ngOnInit(): void {
-    this.familyService.familySelected.subscribe((family: Family) => {
+    this.familyService.familySelected
+    .subscribe((family: Family) => {
       this.selectedFamily = family;
     });
   }

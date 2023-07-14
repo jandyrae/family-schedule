@@ -19,6 +19,7 @@ router.get("/", (req, res, next) => {
         .json({ message: "An error occurred (members)", error: err });
     });
 });
+
 router.get("/:id", (req, res, next) => {
   MemberSchema.findOne({
     id: req.params.id,
@@ -91,4 +92,29 @@ router.put("/:id", (req, res, next) => {
     });
 });
 
+router.delete("/:id", (req, res, next) => {
+  MemberSchema.findOne({
+    id: req.params.id,
+  })
+    .then(() => {
+      MemberSchema.deleteOne({ id: req.params.id })
+        .then(() => {
+          res.status(204).json({
+            message: "Member deleted successfully",
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: "An error occurred deleting the member",
+            error: err,
+          });
+        });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "An error occurred deleting the member",
+        error: err,
+      });
+    });
+});
 module.exports = router;

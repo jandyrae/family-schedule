@@ -46,7 +46,7 @@ export class EventEditComponent implements OnInit {
       }
       this.editMode = true;
 
-      console.log(this.memberList);
+      // console.log(this.memberList);
     });
   }
 
@@ -72,7 +72,7 @@ export class EventEditComponent implements OnInit {
       value.location,
       value.details,
       value.belongsTo,
-      value.members
+      value.members || []
     );
 
     if (this.editMode) {
@@ -120,7 +120,7 @@ export class EventEditComponent implements OnInit {
   }
 
   onDeleteEvent() {
-    this.eventService.deleteEvent(this.event.id);
+    this.eventService.deleteEvent(this.event);
     this.router.navigate(['/events']);
   }
 }

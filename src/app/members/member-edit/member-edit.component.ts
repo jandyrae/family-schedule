@@ -14,11 +14,12 @@ import { FamilyService } from 'src/app/family/family.service';
   styleUrls: ['./member-edit.component.css'],
 })
 export class MemberEditComponent implements OnInit {
-  @Input() member: Member;
+  // @Input()
+  member: Member;
   @ViewChild('memberForm') memberForm: NgForm;
   id: string;
   members: Member[];
-  events: Event[];
+  eventList: Event[] = [];
   editMode = false;
   familyList: Family[] = [];
 
@@ -31,9 +32,9 @@ export class MemberEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.members = this.memberService.getMembers();
+    this.memberService.getMembers();
     this.familyList = this.familyService.getFamilies();
-    // this.events = this.eventService.getEvents();
+    this.eventList = this.eventService.getEvents();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       if (!params) {
@@ -72,7 +73,7 @@ export class MemberEditComponent implements OnInit {
       value.phone,
       value.address,
       value.image,
-      value.events
+      value.events || [],
     );
     if (this.editMode) {
       this.memberService.updateMember(this.member, newMember );
@@ -87,9 +88,9 @@ export class MemberEditComponent implements OnInit {
     this.members = this.memberService.getMembers();
   }
 
-  // onDeleteMember() {
-  //  this.eventService.deleteEvent(this.member.id);
-  //  this.memberService.membersChanged.next(this.members.slice());
-  // }
+  onDeleteMember() {
+   this.memberService.deleteMember(this.member);
+   this.memberService.membersChanged.next(this.members.slice());
+  }
 
 }

@@ -1,39 +1,64 @@
 <div class="container">
-  <h3>Create Family</h3>
-<form (ngSubmit)="onSubmitFamily(familyForm)" #familyForm="ngForm">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      placeholder="Enter name"
-      required
-      [ngModel]="family?.name"
-      name="name"
-      #name="ngModel"
-    />
-  </div>
-  <div class="form-group">
-    <label for="image">Image URL</label>
-    <input
-      type="text"
-      class="form-control"
-      id="image"
-      placeholder="Enter image URL"
-      [ngModel]="family?.image"
-      name="image"
-      #image="ngModel"
-    />
-     <div class="form-group" *ngIf="family.members.length > 0">
-      <label for="members">Members</label>
+  <h3>Family Details</h3>
+  <form (ngSubmit)="onSubmitFamily(familyForm)" #familyForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter name"
+        required
+        [ngModel]="family?.name"
+        name="name"
+        #name="ngModel"
 
-      <select name="members" id="members">
-        <option multiple *ngFor="let members in family.members" value="{{members.id}}">{{members.name}}</option>
-
-      </select>
+      />
+      <!-- <ng-template #notNewFamily>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [ngModel]="family?.name"
+          name="name"
+          #name="ngModel"
+          readonly
+          placeholder="{{ family?.name }}"
+        />
+      </ng-template> -->
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Create</button>
-</form>
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        id="image"
+        placeholder="Enter image URL"
+        [ngModel]="family?.image"
+        name="image"
+        #image="ngModel"
+      />
+      <div class="form-group">
+        <label for="members">Members</label>
+        <select
+        multiple
+          class="form-control"
+          id="members"
+          [ngModel]="family?.members"
+          name="members"
+          #members="ngModel"
+        >
+          <option
+            *ngFor="let member of memberList"
+            [value]="member._id"
+          >
+            {{ member.name }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class=" form-control btn btn-outline-primary">
+        Apply Changes
+      </button>
+    </div>
+  </form>
 </div>

@@ -27,4 +27,9 @@ export class MemberDetailComponent implements OnInit {
   onMemberEdit() {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
+
+  onDelete() {
+    this.memberService.deleteMember(this.member);
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 }

@@ -3,7 +3,6 @@ import { Event } from './event.model';
 import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MemberService } from '../members/member.service';
-import * as e from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +18,7 @@ export class EventService {
   constructor(private http: HttpClient, private memberService: MemberService) {
     this.maxId = this.getMaxId();
   }
+
   getMaxId(): number {
     this.events.forEach((event) => {
       this.currentId = +event.id;
@@ -144,9 +144,26 @@ export class EventService {
     // this.eventsChanged.next(this.events.slice());
   }
 
-  deleteEvent(id: string) {
-
-    this.events.splice(+id, 1);
-    this.eventsChanged.next([...this.events]);
+  deleteEvent(event: Event) {
+    // this.events.splice(+id, 1);
+    // this.eventsChanged.next([...this.events]);
+    if (!event) {
+      return;
+    }
+    const pos = this.events.findIndex((d) => d.id === event.id);
+    if (pos < 0) {
+      return;
+    }
+    this.http.delete(`http://127.0.0.1:3000/events/${event.id}`).subscribe({
+      next: (n) => {
+        this.events.splice(pos, 1);
+        this.events = this.getEvents();
+      },
+      error: (e) => console.error(Error, 'an error occurred' + e),
+      complete: () => {
+        this.eventsChanged.next([...this.events]);
+        console.log('deleteEvent succeeded');
+      },
+    });
   }
 }

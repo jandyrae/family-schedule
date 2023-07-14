@@ -1,5 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
+    <h3>Create Event</h3>
     <form
       id="event-edit"
       (ngSubmit)="onSubmitEvent(eventForm)"
@@ -10,9 +11,11 @@
           <div>
             <label class="form-group" for="name">Event Name:</label>
             <input
-              type="name"
+              type="text"
               id="name"
               name="name"
+              required
+              placeholder="Enter event name"
               class="form-control"
               size="120"
               max="120"

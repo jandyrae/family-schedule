@@ -42,7 +42,7 @@ router.post("/", (req, res, next) => {
   const family = new FamilySchema({
     id: maxFamilyId,
     name: req.body.name,
-    members: req.body.members,
+    members: req.body.members ? [] : [...req.body.members],
     image: req.body.image,
   });
   family
@@ -67,7 +67,7 @@ router.put("/:id", (req, res, next) => {
     .then((family) => {
       // family.id = req.body.id;
       family.name = req.body.name;
-      family.members = (req.body.members = null);
+      family.members = (req.body.members ? [] : [...req.body.members]);
       family.image = req.body.image;
 
       FamilySchema.updateOne({ id: req.params.id }, family)
